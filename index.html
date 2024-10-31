@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GrounDiT: Grounding Diffusion Transformers via Noisy Patch Transplantation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600' rel='stylesheet'
+        type='text/css'>
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="robots" content="noindex">
+
+    <meta property="og:site_name" content="GrounDiT" />
+    <meta property="og:type" content="video.other" />
+    <meta property="og:title" content="GrounDiT: Grounding Diffusion Transformers via Noisy Patch Transplantation" />
+    <meta property="og:description"
+        content="GrounDiT: Grounding Diffusion Transformers via Noisy Patch Transplantation, 2024." />
+    <meta property="og:url" content="" />
+
+    <script src="assets/js/video_comparison.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+    <script src="assets/js/script_groundit.js"></script>
+  </head>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div class="highlight-clean" style="padding-bottom: 10px;">
+        <div class="container" style="max-width: 1024px; margin-bottom: 20px;">
+            <h1 class="text-center"><b>GrounDiT</b>: Grounding Diffusion Transformers <br>via Noisy Patch Transplantation
+            </h1>
+            <h3 class="text-center"><b>NeurIPS 2024</b>
+            </h3>
+        </div>
+        <div class="container" style="max-width: 980px; margin-bottom: 20px;">
+            <div class="row authors">
+                <div class="col">
+                    <h5 class="text-center">
+                        <a href="https://phillipinseoul.github.io/">Phillip Y. Lee*</a>, 
+                        <a href="https://github.com/taehoon-yoon/">Taehoon Yoon*</a>,
+                        <a href="https://mhsung.github.io/">Minhyuk Sung</a>
+                        <!-- <br> -->
+                        <br>KAIST
+                        <br>(* equal contribution.)
+                    </h5>
+                    <!-- <h5 class="text-center">ECCV 2024 Submission</h5> -->
+                </div>
+            </div>
+        </div>
+        <div class="buttons" style="margin-top: 8px; margin-bottom: 8px;">
+            <a class="btn btn-light" role="button" href="./static/groundit_paper.pdf" target="_blank">
+                <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M16 0H8C6.9 0 6 .9 6 2V18C6 19.1 6.9 20 8 20H20C21.1 20 22 19.1 22 18V6L16 0M20 18H8V2H15V7H20V18M4 4V22H20V24H4C2.9 24 2 23.1 2 22V4H4M10 10V12H18V10H10M10 14V16H15V14H10Z"></path>
+                </svg>PDF
+            </a>
+            <a class="btn btn-light" role="button" href="https://arxiv.org/abs/2410.20474">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
+                    <path d="M573.549,280.916l2.266,2.738,6.674-7.84c.353-.47.52-.717.353-1.117a1.218,1.218,0,0,0-1.061-.748h0a.953.953,0,0,0-.712.262Z" transform="translate(-566.984 -271.548)" fill="#bdb9b4"/>
+                    <path d="M579.525,282.225l-10.606-10.174a1.413,1.413,0,0,0-.834-.5,1.09,1.09,0,0,0-1.027.66c-.167.4-.047.681.319,1.206l8.44,10.242h0l-6.282,7.716a1.336,1.336,0,0,0-.323,1.3,1.114,1.114,0,0,0,1.04.69A.992.992,0,0,0,571,293l8.519-7.92A1.924,1.924,0,0,0,579.525,282.225Z" transform="translate(-566.984 -271.548)" fill="#b31b1b"/>
+                    <path d="M584.32,293.912l-8.525-10.275,0,0L573.53,280.9l-1.389,1.254a2.063,2.063,0,0,0,0,2.965l10.812,10.419a.925.925,0,0,0,.742.282,1.039,1.039,0,0,0,.953-.667A1.261,1.261,0,0,0,584.32,293.912Z" transform="translate(-566.984 -271.548)" fill="#bdb9b4"/>
+                </svg>
+                arXiv
+            </a>
+            <a class="btn btn-light" role="button" href="https://github.com/KAIST-Visual-AI-Group/GrounDiT/">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 
+                            1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 
+                            3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 
+                            2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                </svg>
+                Code
+            </a>
+        </div>
+    </div>
+    
+    <!-- Contents -->
+    <div class="container" style="max-width: 1024px;">
+        <div class="row captioned_videos">
+            <div class="col-md-12">
+                <img src="static/teaser.png" alt="architecture" style="width: 100%">
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Abstract</h2>
+                <p>
+                    We introduce a novel training-free spatial grounding technique for text-to-image generation using Diffusion Transformers (DiT). 
+                    Spatial grounding with bounding boxes has gained attention for its simplicity and versatility, allowing for enhanced user control 
+                    in image generation. However, prior training-free approaches often rely on updating the noisy image during the reverse diffusion 
+                    process via backprop- agation from custom loss functions, which frequently struggle to provide precise control over individual 
+                    bounding boxes. In this work, we leverage the flexibility of the Transformer architecture, demonstrating that DiT can generate 
+                    noisy patches corresponding to each bounding box, fully encoding the target object and allowing for fine-grained control over 
+                    each region. Our approach builds on an intriguing property of DiT, which we refer to as semantic sharing. Due to semantic sharing, 
+                    when a smaller patch is jointly denoised alongside a generatable-size image, the two become "semantic clones". Each patch is denoised 
+                    in its own branch of the generation process and then transplanted into the corresponding region of the original noisy image at each 
+                    timestep, resulting in robust spatial grounding for each bounding box. In our experiments on the HRS and DrawBench benchmarks, 
+                    we achieve state-of-the-art performance compared to previous training-free spatial grounding approaches.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <h2>🧐 Motivation</h2>
+        <br>
+        <b>
+            Adding spatial control (e.g. bounding boxes) to text-to-image diffusion models greatly enhances the controllability in image generation.
+            However, existing training-free methods still struggle when dealing with complex conditions, such as multiple objects or thin, small objects.<br>
+        </b>
+        <br>
+        <b>
+            How can we provide precise spatial control over individual bounding boxes?
+        </b>
+        <br><br>
+        <div class="col-md-12">  
+            <img src="static/motivation.png" alt="architecture" style="width: 100%">
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <h2>🔮 Main Idea</h2>
+        <br>
+        <p>
+            Based on the flexibility of Transformer architecture and the role of positional embeddings in encoding spatial information within DiT, 
+            we introduce joint token denoising. We observe that when two noisy images are denoised together — one as a smaller patch and the 
+            other with a generatable-size — they become semantic clones. 
+            Leveraging this "semantic sharing" property of DiT, we propose a novel spatial grounding technique which enables precise control over individual bounding boxes.
+        </p>
+        <br>
+        <div class="col-md-12">  
+            <img src="static/joint_token_denoising.png" alt="architecture" style="width: 90%">
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <h2>🖼️ Spatially Grounded Image Generation</h2>
+        <br>
+        <p>
+            Without additional training, GrounDiT reliably generates each object within the specified bounding box, 
+            showing greater robustness compared to previous methods [1].
+        </p>
+        <br>
+        <div class="col-md-12">  
+            <img src="static/groundit_supp_part_1.png" alt="supp-1" style="width: 100%">
+        </div>
+        <br><hr>
+        <p>
+            Using PixArt-&alpha; [2] as the base DiT model, GrounDiT can further generate spatially grounded images 
+            across diverse aspect ratios.
+        </p>
+        <div class="col-md-12">  
+            <img src="static/groundit_supp_part_2.png" alt="supp-2" style="width: 100%">
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>BibTeX</h2>
+                <code>
+                    @inproceedings{lee2024groundit,<br>
+                        title    =   {GrounDiT: Grounding Diffusion Transformers via Noisy Patch Transplantation},<br>
+                        author   =   {Lee, Phillip Y. and Yoon, Taehoon and Sung, Minhyuk},<br>
+                        booktitle  =   {Advances in Neural Information Processing Systems}, <br>
+                        year     =   {2024}<br>
+                    }
+                </code></div>
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <h2>Acknowledgements</h2>
+        <p>
+            We thank Juil Koo and Jaihoon Kim for valuable discussions on Diffusion Transformers. This work was supported by the 
+            NRF grant (RS-2023-00209723), IITP grants (RS-2019-II190075, RS-2022-II220594, RS-2023-00227592, RS-2024-00399817), 
+            and KEIT grant (RS-2024-00423625), all funded by the Korean government (MSIT and MOTIE), as well as grants from the 
+            DRB-KAIST SketchTheFuture Research Center, NAVER-Intel Co-Lab, Hyundai NGV, KT, and Samsung Electronics.
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <h2>References</h2>
+        <p>
+            [1] <a href="https://arxiv.org/abs/2310.08872">R&B: Region and Boundary Aware Zero-shot Grounded Text-to-image Generation, Xiao et al., ICLR 2024 
+            </a><br>
+            [2] <a href="https://arxiv.org/abs/2202.00008">PIXART-&alpha;: Fast Training of Diffusion Transformer for Photorealistic Text-to-Image Synthesis, Chen et al., ICLR 2024</a>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 1024px;">
+        <footer>
+            <p> Website template from <a href="https://dreamfusion3d.github.io/">DreamFusion</a>. We thank the authors
+                for the open-source code.</p>
+        </footer>
+    </div>
+    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
+    <script src="assets/js/yall.js"></script>
+    <script>
+        yall({
+            observeChanges: true
+        });
+    </script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd002feec.js"></script>
+    <!-- Import the component -->
+</body>
+
+</html>
