@@ -98,17 +98,15 @@
             <div class="col-md-12">
                 <h2>Abstract</h2>
                 <p>
-                    We introduce a novel training-free spatial grounding technique for text-to-image generation using Diffusion Transformers (DiT). 
-                    Spatial grounding with bounding boxes has gained attention for its simplicity and versatility, allowing for enhanced user control 
-                    in image generation. However, prior training-free approaches often rely on updating the noisy image during the reverse diffusion 
-                    process via backprop- agation from custom loss functions, which frequently struggle to provide precise control over individual 
-                    bounding boxes. In this work, we leverage the flexibility of the Transformer architecture, demonstrating that DiT can generate 
-                    noisy patches corresponding to each bounding box, fully encoding the target object and allowing for fine-grained control over 
-                    each region. Our approach builds on an intriguing property of DiT, which we refer to as semantic sharing. Due to semantic sharing, 
-                    when a smaller patch is jointly denoised alongside a generatable-size image, the two become "semantic clones". Each patch is denoised 
-                    in its own branch of the generation process and then transplanted into the corresponding region of the original noisy image at each 
-                    timestep, resulting in robust spatial grounding for each bounding box. In our experiments on the HRS and DrawBench benchmarks, 
-                    we achieve state-of-the-art performance compared to previous training-free spatial grounding approaches.
+                    We introduce GrounDiT, a novel training-free spatial grounding technique for text-to-image generation using Diffusion Transformers (DiT). 
+                    Spatial grounding with bounding boxes has gained attention for its simplicity and versatility, allowing for enhanced user control in image generation. 
+                    However, prior training-free approaches often rely on updating the noisy image during the reverse diffusion process via backpropagation from custom loss functions, 
+                    which frequently struggle to provide precise control over individual bounding boxes. In this work, we leverage the flexibility of the Transformer architecture, 
+                    demonstrating that DiT can generate noisy patches corresponding to each bounding box, fully encoding the target object and allowing for fine-grained control 
+                    over each region. Our approach builds on an intriguing property of DiT, which we refer to as semantic sharing. Due to semantic sharing, when a smaller patch 
+                    is jointly denoised alongside a generatable-size image, the two become semantic clones. Each patch is denoised in its own branch of the generation process 
+                    and then transplanted into the corresponding region of the original noisy image at each timestep, resulting in robust spatial grounding for each bounding box. 
+                    In our experiments on the HRS and DrawBench benchmarks, we achieve state-of-the-art performance compared to previous training-free approaches.
                 </p>
             </div>
         </div>
@@ -118,14 +116,13 @@
     <div class="container" style="max-width: 1024px;">
         <h2>🧐 Motivation</h2>
         <br>
-        <b>
+        <p>
             Adding spatial control (e.g. bounding boxes) to text-to-image diffusion models greatly enhances the controllability in image generation.
             However, existing training-free methods still struggle when dealing with complex conditions, such as multiple objects or thin, small objects.<br>
-        </b>
-        <br>
-        <b>
+        </p>
+        <p>
             How can we provide precise spatial control over individual bounding boxes?
-        </b>
+        </p>
         <br><br>
         <div class="col-md-12">  
             <img src="static/motivation.png" alt="architecture" style="width: 100%">
@@ -138,13 +135,13 @@
         <br>
         <p>
             Based on the flexibility of Transformer architecture and the role of positional embeddings in encoding spatial information within DiT, 
-            we introduce joint token denoising. We observe that when two noisy images are denoised together — one as a smaller patch and the 
+            we first introduce joint denoising. We observe that when two noisy images are denoised together — one as a smaller patch and the 
             other with a generatable-size — they become semantic clones. 
             Leveraging this "semantic sharing" property of DiT, we propose a novel spatial grounding technique which enables precise control over individual bounding boxes.
         </p>
         <br>
         <div class="col-md-12">  
-            <img src="static/joint_token_denoising.png" alt="architecture" style="width: 90%">
+            <img src="static/joint_denoising.png" alt="architecture" style="width: 90%">
         </div>
     </div>
 
